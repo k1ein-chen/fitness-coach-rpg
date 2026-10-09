@@ -190,32 +190,47 @@ def main():
     sessions = load_all_sessions()
     state = load_json(state_file)
 
-    state["recent_bests"] = compute_bests(sessions)
-    state["recovery"] = compute_recovery(sessions)
+    # 合并 PR 最佳记录（不冲掉历史更优表现）
+    new_bests = compute_bests(sessions)
+    existing_bests = state.get("recent_bests", {})
+    for k, v in new_bests.items():
+        if k not in existing_bests or v.get("weight_kg", 0) >= existing_bests[k].get("weight_kg", 0):
+            existing_bests[k] = v
+    state["recent_bests"] = existing_bests
 
-    exp = compute_exp(sessions)
-    state["profile"]["exp"] = exp
-    new_level = 1
+    if sessions:
+        state["recovery"] = compute_recovery(sessions)
+
+    # 经验与等级：保留历史基线
+    session_exp = compute_exp(sessions)
+    base_exp = state["profile"].get("base_exp", 295)
+    total_exp = base_exp + session_exp
+    state["profile"]["exp"] = total_exp
+
+    old_level = state["profile"].get("level", 18)
+    new_level = old_level
     for lv in sorted(LEVEL_THRESHOLDS, reverse=True):
-        if exp >= LEVEL_THRESHOLDS[lv]:
-            new_level = lv
+        if total_exp >= LEVEL_THRESHOLDS[lv]:
+            new_level = max(old_level, lv)
             break
-    old_level = state["profile"].get("level", 1)
     if new_level != old_level:
         print(f"🎉 升级！Lv.{old_level} → Lv.{new_level}")
     state["profile"]["level"] = new_level
-    state["profile"]["exp_to_next"] = LEVEL_THRESHOLDS.get(new_level + 1, 15000)
 
     new_attr = compute_attributes(sessions)
     old_attr = state.get("attributes", {})
-    old_attr["STR"] = new_attr["STR"]
-    old_attr["CON"] = new_attr["CON"]
+    if new_attr["STR"] > 0:
+        old_attr["STR"] = max(old_attr.get("STR", 0), new_attr["STR"])
+    if new_attr["CON"] > 0:
+        old_attr["CON"] = max(old_attr.get("CON", 0), new_attr["CON"])
     state["attributes"] = old_attr
 
+
+    state["profile"]["exp_to_next"] = state["profile"].get("exp_to_next", 900)
     state["updated_at"] = datetime.now(CN_TZ).strftime("%Y-%m-%dT%H:%M:%S+08:00")
     atomic_write(state_file, state)
     print(f"✅ 已更新 {state_file.name}")
-    print(f"   Lv.{new_level} | EXP {exp}/{state['profile']['exp_to_next']} | "
+    print(f"   Lv.{new_level} | EXP {total_exp}/{state['profile']['exp_to_next']} | "
           f"STR {old_attr['STR']} CON {old_attr['CON']}")
     print("   END/AGI/INT 留空，由 AI 训练后评估填入。")
     return 0

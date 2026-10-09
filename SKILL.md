@@ -61,6 +61,8 @@ description: 本地文件驱动的长期健身教练与可选 RPG 成长系统�
 | 训练复盘 | “复盘”“总结今天” | 本次完整 session | 趋势、恢复、下次建议 |
 | 复训模式 | 中断后回归（days_since_last 较大） | recovery + 最近 sessions | 基线重建，保守起步 |
 | 剧情模式 | “继续剧情”“推进故事” | 训练结果 + story/STATE | 简短叙事推进 |
+| 营养打卡 | “今天体重XX”“吃了XX大卡” | nutrition + CURRENT-STATE | 记录数据并自动更新代谢均线与热量建议 |
+
 
 ---
 
@@ -81,12 +83,11 @@ description: 本地文件驱动的长期健身教练与可选 RPG 成长系统�
 
 ## 3. 结束后
 
-- 生成训练复盘
-- 写入训练记录：有 Python 环境时调用 `python scripts/append_session.py`（追加到 `user-data/sessions/YYYY-MM-DD.json`，自动校验单位与日期），再调用 `python scripts/update_summary.py` 更新 `CURRENT-STATE.json`（重算 EXP/属性/recovery）
-- 无 Python 环境时，AI 直接手写 `user-data/sessions/YYYY-MM-DD.json` 与 `CURRENT-STATE.json`（格式见 `assets/starter-profile/example-session.json`）
-- 同步当前档案中的关键字段
-- 若开启剧情模式，则推进剧情状态并追加简短叙事
-- **鼓励用户多描述体感和细节**（哪里酸、什么感觉、心情怎样）——这些主观反馈是 AI 建立个性化模型的关键数据。训练记录越详细，后续建议越精准
+- **写入前必查上一日**：检索并阅读上一篇 `user-data/sessions/` 记录，保证负荷递进、关节恢复走势与剧情生活细节的自然连贯。
+- 写入训练记录：调用 `python scripts/append_session.py`（追加到 `user-data/sessions/YYYY-MM-DD.json`），再调用 `python scripts/update_summary.py` 更新 `CURRENT-STATE.json`。
+- **生成表里双生单日手记**：在 `user-data/sessions/YYYY-MM-DD.md` 输出上半部分（客观科学教练日志）与下半部分（自然写实、富有人间烟火气的异界微小说）。具体模板参照 `templates/SESSION-TEMPLATE.md`。
+- **编年史解耦**：日常手记按日保存，待阶段性里程碑或用户明确指示时，再统筹提炼为宏大长篇。
+- **鼓励用户多描述体感和细节**（哪里酸、什么感觉、心情怎样）——这些主观反馈是 AI 建立个性化模型与剧情生动性的关键数据。
 
 ---
 
@@ -107,6 +108,11 @@ description: 本地文件驱动的长期健身教练与可选 RPG 成长系统�
 ## sessions/YYYY-MM-DD.json（训练记录）
 
 每日训练（动作、组数、重量、RPE、疼痛）。追加不覆盖，按日文件。AI 只读最近 3-5 天的 session。
+
+## nutrition.json（饮食与自适应代谢）
+
+每日体重与摄入热量记录（日期为 Key，包含 weight_kg, calories_in, protein_g）。由 `log_nutrition.py` 和 `update_metabolism.py` 维护，通过 EMA 指数均线过滤水分噪声，基于能量守恒逆推真实 TDEE 并更新 `CURRENT-STATE.json` 中的 `metabolism` 快照。
+
 
 ## story/WORLD.md（静态世界）
 
