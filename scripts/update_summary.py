@@ -183,6 +183,12 @@ def compute_attributes(sessions):
 
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="Update CURRENT-STATE.json summary")
+    parser.add_argument("--quest-exp", type=int, default=0, help="剧情任务达成奖励经验 (EXP)")
+    args = parser.parse_args()
+    quest_exp = args.quest_exp
+
     state_file = USER_DATA / "CURRENT-STATE.json"
     if not state_file.exists():
         print(f"❌ {state_file} 不存在。先运行 init_profile.py。")
@@ -209,7 +215,7 @@ def main():
     # 若无新 session，则维持当前已有经验值，不强制归位；固化 base_exp 防止二次重复累加
     current_exp = profile_obj.get("exp", 0)
     base_exp = profile_obj.get("base_exp", current_exp)
-    total_exp = current_exp if not sessions else (base_exp + session_exp)
+    total_exp = (current_exp + quest_exp) if not sessions else (base_exp + session_exp + quest_exp)
 
     old_level = profile_obj.get("level", 1)
     new_level = old_level
