@@ -43,22 +43,23 @@ tags:
   - 补剂：{{SUPPLEMENTS}} (例如: 蛋白粉、肌酸)
   - 全天估算蛋白：~{{PROTEIN_G}}g / 目标 {{TARGET_PROTEIN_G}}g
 - **伤病警戒区跟踪**：
-  - **受限/警报关节**：{{JOINT_STATUS}}
+  - **左肩（重点监控）**：{{LEFT_SHOULDER_STATUS}}
+  - **右膝（重点监控）**：{{RIGHT_KNEE_STATUS}}
 - **教练下次递进指标**：
   - {{NEXT_TARGETS}}
 
 ---
 
-## 🔮 下半部分：异界回响与修炼纪事 (Fantasy Echoes)
+## 🔮 下半部分：巨龙港异界回响 (Tales from Longwan Port)
 
-> **纪事**：{{CHAPTER_SUBTITLE}}
+> **魔导纪事**：{{CHAPTER_SUBTITLE}}
 
 {{GROUNDED_STORY_PARAGRAPHS}}
-*(写作要求：不堆砌华丽词藻，用词自然克制；有小说感与故事张力；动作意象化，不出现现代词汇与动作名)*
+*(写作指引：创作前必读 profiles/STORY-LOG.md 对齐当前大纲与任务，并参考 references/narrative-templates.md 启发式感觉映射灵感库。绝非给健身房换皮，发力可延伸至剑技全身动力链、风浪对抗、甲胄压制或市井糙活；严禁江湖黑话与刻意短句；严禁出现“下班/打卡/地铁”等现代词汇)*
 
 ---
 
 ### ⚔️ 本役战绩结算 (State Delta)
 - **本场斩获**：`+{{EXP_GAINED}} EXP`（当前等级进度：`Lv.{{LEVEL}} [ {{CURRENT_EXP}} / {{NEXT_LEVEL_EXP}} ]`）
-- **世界经济账本**：{{LEDGER_DELTA}}
-- **身体与心境状态**：{{STATUS_BUFFS}}
+- **巨龙港账本**：{{LEDGER_DELTA}} (例如: 消耗 26.4 铜钱，今日余粮充足)
+- **身体与心境状态**：{{STATUS_BUFFS}} (例如: 【轻度肌肉酸胀】、【经脉唤醒度提升】)
