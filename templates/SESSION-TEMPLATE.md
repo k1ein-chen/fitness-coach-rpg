@@ -55,7 +55,8 @@ tags:
 > **魔导纪事**：{{CHAPTER_SUBTITLE}}
 
 {{GROUNDED_STORY_PARAGRAPHS}}
-*(写作指引：创作前必读 profiles/STORY-LOG.md 对齐当前大纲与任务，并参考 references/narrative-templates.md 启发式感觉映射灵感库。绝非给健身房换皮，发力可延伸至剑技全身动力链、风浪对抗、甲胄压制或市井糙活；严禁江湖黑话与刻意短句；严禁出现“下班/打卡/地铁”等现代词汇)*
+*(写作要求：不堆砌华丽词藻，用词自然克制；有小说感与故事张力；动作意象化，不出现现代词汇与动作名)*
+*(写作指引：创作前必读 profiles/STORY-LOG.md 对齐当前大纲与任务，并参考 references/narrative-templates.md 启发式感觉映射灵感库。将训练内容与状态自然融入剧情推进与任务执行中，绝非给健身房换皮；严禁江湖黑话与刻意短句；严禁出现“下班/打卡/地铁”等现代词汇)*
 
 ---
 
