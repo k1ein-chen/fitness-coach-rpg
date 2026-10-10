@@ -201,13 +201,15 @@ def main():
     if sessions:
         state["recovery"] = compute_recovery(sessions)
 
-    # 经验与等级：保留历史基线
+    # 经验与等级：保留历史基线，自适应扁平/嵌套结构
     session_exp = compute_exp(sessions)
-    base_exp = state["profile"].get("base_exp", 295)
-    total_exp = base_exp + session_exp
-    state["profile"]["exp"] = total_exp
+    profile_obj = state.get("profile", state)
+    # 若无新 session，则维持当前已有经验值，不强制归位
+    current_exp = profile_obj.get("exp", 0)
+    base_exp = profile_obj.get("base_exp", current_exp)
+    total_exp = current_exp if not sessions else (base_exp + session_exp)
 
-    old_level = state["profile"].get("level", 18)
+    old_level = profile_obj.get("level", 1)
     new_level = old_level
     for lv in sorted(LEVEL_THRESHOLDS, reverse=True):
         if total_exp >= LEVEL_THRESHOLDS[lv]:
@@ -215,24 +217,35 @@ def main():
             break
     if new_level != old_level:
         print(f"🎉 升级！Lv.{old_level} → Lv.{new_level}")
-    state["profile"]["level"] = new_level
 
+    exp_to_next = LEVEL_THRESHOLDS.get(new_level + 1, 900)
+    if "profile" in state:
+        state["profile"]["exp"] = total_exp
+        state["profile"]["level"] = new_level
+        state["profile"]["exp_to_next"] = exp_to_next
+    else:
+        state["exp"] = total_exp
+        state["level"] = new_level
+        state["next_level_exp"] = exp_to_next
+
+    # 属性更新：兼容大写 (STR/CON) 与小写 (strength/endurance)
     new_attr = compute_attributes(sessions)
     old_attr = state.get("attributes", {})
-    if new_attr["STR"] > 0:
+    if "STR" in old_attr and new_attr["STR"] > 0:
         old_attr["STR"] = max(old_attr.get("STR", 0), new_attr["STR"])
-    if new_attr["CON"] > 0:
+    if "CON" in old_attr and new_attr["CON"] > 0:
         old_attr["CON"] = max(old_attr.get("CON", 0), new_attr["CON"])
+    if "strength" in old_attr and new_attr["STR"] > 0:
+        old_attr["strength"] = max(old_attr.get("strength", 0), int(new_attr["STR"]))
     state["attributes"] = old_attr
 
-
-    state["profile"]["exp_to_next"] = state["profile"].get("exp_to_next", 900)
     state["updated_at"] = datetime.now(CN_TZ).strftime("%Y-%m-%dT%H:%M:%S+08:00")
     atomic_write(state_file, state)
+    str_display = old_attr.get("STR", old_attr.get("strength", 0))
+    con_display = old_attr.get("CON", old_attr.get("endurance", 0))
     print(f"✅ 已更新 {state_file.name}")
-    print(f"   Lv.{new_level} | EXP {total_exp}/{state['profile']['exp_to_next']} | "
-          f"STR {old_attr['STR']} CON {old_attr['CON']}")
-    print("   END/AGI/INT 留空，由 AI 训练后评估填入。")
+    print(f"   Lv.{new_level} | EXP {total_exp}/{exp_to_next} | "
+          f"STR/力量 {str_display} CON/耐力 {con_display}")
     return 0
 
 

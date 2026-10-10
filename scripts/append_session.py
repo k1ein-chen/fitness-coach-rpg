@@ -27,8 +27,8 @@ def validate_exercise(ex):
         w = s.get("weight_kg")
         r = s.get("reps")
         rpe = s.get("rpe")
-        if w is not None and w <= 0:
-            raise ValueError(f"动作 {ex['exercise']} 第{i+1}组 weight_kg 必须 > 0")
+        if w is not None and w < 0:
+            raise ValueError(f"动作 {ex['exercise']} 第{i+1}组 weight_kg 必须 >= 0")
         if r is not None and r <= 0:
             raise ValueError(f"动作 {ex['exercise']} 第{i+1}组 reps 必须 > 0")
         if rpe is not None and not (1 <= rpe <= 10):

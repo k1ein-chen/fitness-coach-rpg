@@ -14,7 +14,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import load_json, atomic_write
 
 ROOT = Path(__file__).resolve().parent.parent
-STARTER = ROOT / "assets" / "starter-profile"
+if (ROOT / "assets" / "starter-profile").exists():
+    STARTER = ROOT / "assets" / "starter-profile"
+else:
+    STARTER = ROOT / "share" / "assets" / "starter-profile"
 USER_DATA = ROOT / "user-data"
 
 

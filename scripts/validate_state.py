@@ -35,15 +35,16 @@ def main():
             except Exception as e:
                 errors.append(f"{f.name} 格式错误: {e}")
 
-    exp = state.get("profile", {}).get("exp", 0)
+    profile = state.get("profile", state)
+    exp = profile.get("exp", 0)
     if exp < 0:
         errors.append(f"EXP 为负: {exp}")
-    level = state.get("profile", {}).get("level", 1)
-    if not (1 <= level <= 7):
+    level = profile.get("level", 1)
+    if not (1 <= level <= 100):
         warnings.append(f"等级超出范围: {level}")
 
     attr = state.get("attributes", {})
-    for k in ("STR", "CON"):
+    for k in ("STR", "CON", "strength", "endurance", "agility", "willpower", "recovery"):
         v = attr.get(k)
         if v is not None and v < 0:
             warnings.append(f"{k} 为负: {v}")
