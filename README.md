@@ -20,8 +20,8 @@
 - 🎯 **对话式训练**：和 AI 聊天就能记录训练、获取建议、推进剧情
 - 📊 **自动加点**：完成训练自动获得 EXP，升级后属性点自动分配（力量/耐力/体质/敏捷/智力）
 - 📝 **智能记录**：自动追踪重量、次数、RPE、体感反馈，AI 会参考历史数据给建议
-- 🎭 **剧情模式**：可选的故事系统，把每次训练映射为异世界冒险
-- 🌍 **多世界观**：内置剑与魔法、武侠、乙游等主题，也可以自己创建
+- 🎭 **剧情模式**：可选的故事系统，把每次训练映射成你设定的世界里的冒险
+- 🌍 **自由世界观**：完全可定制。剑与魔法、武侠、乙游只是例子，也可以直接描述任何世界；未设定时可用预置的剑与魔法世界
 - 🔄 **恢复感知**：智能判断中断后的恢复强度，不硬来
 - 🤖 **越用越懂你**：AI 会记住你的偏好、弱项和进步节奏
 
@@ -36,16 +36,16 @@
 把下面这段话发给你的 Agent：
 
 ```text
-请帮我安装 https://github.com/k1ein-chen/fitness-coach-rpg ，按仓库 README 初始化档案（可选主题：异世界/武侠/乙游），然后引导我开始第一次训练。
+请帮我安装 https://github.com/k1ein-chen/fitness-coach-rpg ，按仓库 README 初始化档案。世界观可以自由定制（比如异世界、武侠、乙游，或者我自己描述的任何世界），请先问我想要什么世界观，然后引导我开始第一次训练。
 ```
 
 English:
 
 ```text
-Please install https://github.com/k1ein-chen/fitness-coach-rpg, initialize my profile following the repo README (optional theme: isekai / wuxia / otome), then guide me through my first workout.
+Please install https://github.com/k1ein-chen/fitness-coach-rpg and initialize my profile following the repo README. The worldview is fully customizable (for example isekai, wuxia, otome, or any world I describe). Ask which worldview I want first, then guide me through my first workout.
 ```
 
-Agent 会克隆仓库、按本 README 初始化档案，并带你开始第一次训练。
+Agent 会克隆仓库、按本 README 初始化档案，先问你想要什么世界观，再引导第一次训练。
 
 ### 路径 2 — 手动克隆
 
@@ -63,6 +63,8 @@ cd fitness-coach-rpg
 ```bash
 python scripts/init_profile.py --name 你的名字 --theme 武侠
 ```
+
+> `--theme` 是自由文本。「武侠」只是例子，可以换成你自己描述的任何世界。
 
 **方式二：手动复制**
 
@@ -112,6 +114,8 @@ AI 会自动读取你的档案和历史记录，给出个性化建议。
 ![训练推动剧情进度，并在不同世界观之间切换](./assets/demo-story.gif)
 
 ### 世界观选择
+
+世界观可以完全按你的描述定制。下表只是几种常见风格的等级称号示例，不是可选清单。预置世界在 `worlds/default/`（剑与魔法）；也可以用 `assets/starter-profile/story/WORLD.md` 从空白模板写自己的世界。
 
 | 主题 | 等级称号示例 |
 |:---|:---|
@@ -230,7 +234,7 @@ Fitness Coach RPG is a conversation-driven AI fitness coach framework that links
 - Chat-based workout tracking (weight, reps, RPE, notes)
 - Auto stat allocation: training → EXP → level up → attribute growth
 - Optional story mode: map real workouts to fantasy adventures
-- Multiple worldviews: Sword & Sorcery, Wuxia, or custom
+- Fully customizable worldview. Sword & Sorcery and Wuxia are examples; describe any world you want. A preset Sword & Sorcery world is included if you do not want to start from scratch.
 - Recovery-aware planning with smart intensity adjustment
 - Local Markdown/JSON storage — your data stays yours
 
@@ -239,7 +243,7 @@ Fitness Coach RPG is a conversation-driven AI fitness coach framework that links
 **1. Hand it to an agent (recommended)** if you already use Cursor, Claude Code, Codex, or another file-aware agent. Paste:
 
 ```text
-Please install https://github.com/k1ein-chen/fitness-coach-rpg, initialize my profile following the repo README (optional theme: isekai / wuxia / otome), then guide me through my first workout.
+Please install https://github.com/k1ein-chen/fitness-coach-rpg and initialize my profile following the repo README. The worldview is fully customizable (for example isekai, wuxia, otome, or any world I describe). Ask which worldview I want first, then guide me through my first workout.
 ```
 
 **2. Clone manually:**
@@ -249,6 +253,8 @@ git clone https://github.com/k1ein-chen/fitness-coach-rpg.git
 cd fitness-coach-rpg
 python scripts/init_profile.py --name YourName --theme "Sword & Sorcery"
 ```
+
+`--theme` is free text. "Sword & Sorcery" is only an example.
 
 Then open the project in a file-aware AI environment and say "Start training" or "Initialize profile".
 
