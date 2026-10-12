@@ -2,9 +2,7 @@
 
 > 把枯燥的现实训练，变成一场可以升级记录的异世界冒险
 
-<!-- TODO: 添加 demo GIF 或视频
-![Demo](./assets/demo.gif)
--->
+![卧推起杠，化作斩击怪物，随后 LEVEL UP](./assets/demo-hero.gif)
 
 [![License](https://img.shields.io/github/license/k1ein-chen/fitness-coach-rpg)](./LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/k1ein-chen/fitness-coach-rpg?style=social)](https://github.com/k1ein-chen/fitness-coach-rpg)
@@ -31,14 +29,34 @@
 
 ## 🚀 快速开始
 
-### 1. 获取项目
+已经有能读写文件的 AI Agent（Cursor、Claude Code、Codex 等）时，把安装和第一次训练交给它。想自己克隆，用路径 2。
+
+### 路径 1 — 一句话交给 Agent（推荐）
+
+把下面这段话发给你的 Agent：
+
+```text
+请帮我安装 https://github.com/k1ein-chen/fitness-coach-rpg ，按仓库 README 初始化档案（可选主题：异世界/武侠/乙游），然后引导我开始第一次训练。
+```
+
+English:
+
+```text
+Please install https://github.com/k1ein-chen/fitness-coach-rpg, initialize my profile following the repo README (optional theme: isekai / wuxia / otome), then guide me through my first workout.
+```
+
+Agent 会克隆仓库、按本 README 初始化档案，并带你开始第一次训练。
+
+### 路径 2 — 手动克隆
+
+#### 1. 获取项目
 
 ```bash
 git clone https://github.com/k1ein-chen/fitness-coach-rpg.git
 cd fitness-coach-rpg
 ```
 
-### 2. 初始化档案
+#### 2. 初始化档案
 
 **方式一：脚本初始化（推荐）**
 
@@ -55,9 +73,9 @@ cp -r assets/starter-profile user-data
 
 > 💡 脚本只用 Python 标准库，无需安装依赖。没有 Python？直接复制模板也能用。
 
-### 3. 开始训练
+#### 3. 开始训练
 
-在支持的 AI 环境中打开项目，对 AI 说：
+在支持读写本地文件的 AI 里打开项目，对 AI 说：
 
 - "开始训练" — 直接开练
 - "初始化档案" — 完整设定流程
@@ -78,6 +96,8 @@ AI 会自动读取你的档案和历史记录，给出个性化建议。
 3. 检查是否升级，自动分配属性点
 4. 更新训练统计和个人最佳记录
 
+![完成训练后结算经验，升级并自动分配属性点](./assets/demo-exp.gif)
+
 ### 剧情模式（可选）
 
 开启后，你的训练会映射为故事情节：
@@ -88,6 +108,8 @@ AI 会自动读取你的档案和历史记录，给出个性化建议。
 | 拉日 (Pull) | 控制、夺取、精确发力 |
 | 腿日 (Legs) | 负重、坚守、耐力考验 |
 | 恢复/有氧 | 营地修整、旅行、侦察 |
+
+![训练推动剧情进度，并在不同世界观之间切换](./assets/demo-story.gif)
 
 ### 世界观选择
 
@@ -213,6 +235,14 @@ Fitness Coach RPG is a conversation-driven AI fitness coach framework that links
 - Local Markdown/JSON storage — your data stays yours
 
 **Quick Start:**
+
+**1. Hand it to an agent (recommended)** if you already use Cursor, Claude Code, Codex, or another file-aware agent. Paste:
+
+```text
+Please install https://github.com/k1ein-chen/fitness-coach-rpg, initialize my profile following the repo README (optional theme: isekai / wuxia / otome), then guide me through my first workout.
+```
+
+**2. Clone manually:**
 
 ```bash
 git clone https://github.com/k1ein-chen/fitness-coach-rpg.git
