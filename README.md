@@ -2,7 +2,7 @@
 
 > 把枯燥的现实训练，变成一场可以升级记录的异世界冒险
 
-![卧推起杠，化作斩击怪物，随后 LEVEL UP](./assets/demo-hero.gif)
+![卧推起杠，化作斩击怪物，随后 LEVEL UP](./assets/demo-hero.webp)
 
 [![License](https://img.shields.io/github/license/k1ein-chen/fitness-coach-rpg)](./LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/k1ein-chen/fitness-coach-rpg?style=social)](https://github.com/k1ein-chen/fitness-coach-rpg)
@@ -98,7 +98,7 @@ AI 会自动读取你的档案和历史记录，给出个性化建议。
 3. 检查是否升级，自动分配属性点
 4. 更新训练统计和个人最佳记录
 
-![完成训练后结算经验，升级并自动分配属性点](./assets/demo-exp.gif)
+![完成训练后结算经验，升级并自动分配属性点](./assets/demo-exp.webp)
 
 ### 剧情模式（可选）
 
@@ -111,7 +111,7 @@ AI 会自动读取你的档案和历史记录，给出个性化建议。
 | 腿日 (Legs) | 负重、坚守、耐力考验 |
 | 恢复/有氧 | 营地修整、旅行、侦察 |
 
-![训练推动剧情进度，并在不同世界观之间切换](./assets/demo-story.gif)
+![训练推动剧情进度，并在不同世界观之间切换](./assets/demo-story.webp)
 
 ### 世界观选择
 
