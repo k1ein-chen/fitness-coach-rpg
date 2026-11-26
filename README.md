@@ -1,5 +1,9 @@
 # Fitness Coach RPG 🎮💪
 
+<!-- yarkr:badges:start -->
+[![Indexed on Yarkr](https://api.yarkr.com/functions/v1/api/api/v1/badges/repos/k1ein-chen/fitness-coach-rpg/version.svg)](https://yarkr.com/arks/k1ein-chen/fitness-coach-rpg)
+<!-- yarkr:badges:end -->
+
 > 把枯燥的现实训练，变成一场可以升级记录的异世界冒险
 
 ![卧推起杠，化作斩击怪物，随后 LEVEL UP](./assets/demo-hero.webp)
@@ -259,3 +263,35 @@ python scripts/init_profile.py --name YourName --theme "Sword & Sorcery"
 Then open the project in a file-aware AI environment and say "Start training" or "Initialize profile".
 
 See [RELEASE-v0.1.md](./RELEASE-v0.1.md) for more details in English.
+
+<!-- yarkr:install:start -->
+## Install with Yarkr
+
+This repo is indexed on [Yarkr](https://yarkr.com/arks/k1ein-chen/fitness-coach-rpg) as the ark [k1ein-chen/fitness-coach-rpg](https://yarkr.com/arks/k1ein-chen/fitness-coach-rpg), so its skills install into Claude Code, Codex, Cursor and other agent harnesses with one command.
+
+### CLI
+
+Install the whole ark, which Yarkr keeps equal to this repo:
+
+```bash
+npx yarkr-cli sync k1ein-chen/fitness-coach-rpg
+```
+
+Or add individual skills:
+
+```bash
+npx yarkr-cli add skill:k1ein-chen/fitness-coach-rpg/fitness-coach-rpg
+```
+
+No Node.js? `curl -fsSL https://yarkr.com/install.sh | sh` (macOS, Linux) or `irm https://yarkr.com/install.ps1 | iex` (Windows PowerShell) installs `yarkr` as a standalone binary; then type `yarkr` in place of `npx yarkr-cli`.
+
+### MCP
+
+Connect your agent to the ark over MCP:
+
+```bash
+npx yarkr-cli mcp add k1ein-chen/fitness-coach-rpg
+```
+
+Or point any MCP client at `https://api.yarkr.com/functions/v1/api/mcp/o/k1ein-chen/fitness-coach-rpg`.
+<!-- yarkr:install:end -->
